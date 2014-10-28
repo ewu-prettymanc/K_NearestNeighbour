@@ -1,0 +1,4 @@
+//Colton Prettyman CS253....Project1...Prof. John Mill
+
+Description/Requirements: Find the outcome of a testing set of data by using
+the k nearest neighbor algorythm of a training set of vectors. 

@@ -1,0 +1,170 @@
+//Colton Prettyman CS253....Project1...Prof. John Mill
+
+Description/Requirements: Find the outcome of a testing set of data by using
+the k nearest neighbor algorythm of a training set of vectors. 
+
+First use the random selection of important vectors. 
+extra credit will be given for cross validation or clustering. 
+
+
+*****************************Object Definations***************************
+Driver Object
+#include "knn.h"
+
+members:
+  data_set _train;
+  data_set _test;
+  knn * _knn;
+  int _k;
+ 
+methods:
+
+//constructor
+name: driver
+desc: Checks to make sure all user input is valid then allocates a new knn 
+object.
+params: char * train, char * test, int kVal
+returns: n/a
+1) check to make sure it is valid input		(F)
+2) allocate a new knn object	  		
+
+//destructor
+name: ~driver
+desc: delets the _knn member
+params: n/a
+returns: n/a
+1) delete _knn
+
+//Step 1 of driver 
+name: check_valid_input
+desc: checks valid k dimension. valid traind and test files. and valid 
+important vector size. 
+params: none
+returns: void
+1) check k isn't greater then IMPORTANT_SIZE
+2) check valid train and test file dimensions
+3) check valid IMPORTANT_SIZE compared to train size 
+
+name: calc_outcome
+desc: trains a set of important vectors for each tested vector and then 
+calculates an outcome by taking a majority vote from k of its closest neighbours
+It selects a new set of important vectors a certain ITERATION number of times. 
+It prints out the results of the most accurate testing
+params:none
+returns: void
+1) for ITERATION number of times do steps 2 - 8 		(L)
+2) find an important set of vectors
+3) for each row of the test file do steps 4-6			(L)
+4) sort the important vectors according to that row				
+5) classify the outcome of that row
+6) keep a running tab of how many errors we produce
+7) for the first time in the loop the lowest error score gets the errors
+8) every other time if the new errors is lower then the lowest so far
+ give it that erros value  
+9) print the accuracy of the testing 
+
+.........................................................................
+KNN Object
+
+#include"data_set.h"
+#include<math.h>
+
+members:
+  int _num_cols;
+  double ** _important; 
+  double _outcome; 
+
+methods:
+
+//constructor
+name: knn
+desc: allocates a 2d array of doubles. 
+params: int num_cols
+returns: void
+1) allocate a double array pointer IMPORTANT_SIZE length
+2) for each element of the double array allocate an array of _num_cols length
+
+//desctructor
+name: ~knn
+desc: deletes each element of the _important vector array..then deletes the
+important array. 
+params: n/a
+returns: n/a
+1) delete [] each array pointed to by the _important[x] array
+2) delete [] the _important array
+
+name: find_important
+desc: randomly selects and stores important vectors from the train data set.
+ Making sure it doesn't select the same row twice. 
+params: data_set * traind
+returns: void
+1) for each element of the _important vector array do steps 2-8		(L)
+2) while we don't have a valid vector selection do steps 3-6		(L)
+3) generate a random intiger between 0 and IMPORTANT_SIZE
+4) check to make sure we have generated and stored that row before. 
+5) if it has then generate a new one. 
+6) once we have a valid number store it in our used_row array
+7) copy the data from that the random row train row into the next available
+   row of our _important vector array
+8) in the last element of each _important vector array store the outcome. 
+
+name: sort_important
+desc:  sorts the rows in our _important array according to the geometric 
+distance of the row given and the current  row of _important array. 
+params: row * r
+returns: void 
+0) while the number_switched != 0 do steps 1-4				(L)
+1) for each element of the _important array do steps 2-	4		(L)
+2) calculate the geometric distance between the row and that element of		
+   important. 	 	   	    	    	    	     	     	(F)
+3) calculate the geometric distance between the row and that element +1 of
+   important 	 	   	    	    	    	     	     	
+4) if the second distane is greater then the first distance then switch the
+   rows and add one to the number_switched. 
+
+// Step 2 of sort_important
+name: get_dist
+params: double * train, double test 
+desc: calculates the sum of the geometric distances between each given array
+params: double * traind, double * test
+returns: double
+1) for each column of the arrays do step 2				(L)
+2)    temp += pow( (train[i] - test[i]), 2); 
+3) take the square root of the temp 
+4) return distance. 
+
+name: classify_row
+desc: classifies the row by the average of the first _k outcomes
+params: int kVal
+returns: int
+1) for the first kVal rows of _important sum up the outcomes		(L)
+2) if the outcomes are greater then 0  return 1
+3) if the outcomes are less then 0 return -1
+4) generate a random number between 1 and 2
+5) if random is 2 return 1
+6) else return -1. //note this should only be neccessary with even k values
+
+name: print
+desc: prints the _important array
+params: noe
+returns: void
+1) for each row do step 2		(L)
+2) for each col do step 3		(L)
+3) print _important[i][j]
+4) start a new line 
+
+...................................MAIN...................................
+#include"driver.h"
+#include<time.h> 
+
+Main:
+name: main
+desc: is given command line arguements. Seed's the random generater. Allocates a new 
+driver object. Calculates the outcome .
+params: argc, char ** argv
+returns: int
+1) make sure we have the correct number of command line arguements. 
+2) seed the random with a time of 0
+3) allocate a new driver. with argv[1], argv[2], and atoi[3] as parameters. 
+   // note we need to convert paramter 3 from a character an intiger
+4) calculate the outcome of the test file. 

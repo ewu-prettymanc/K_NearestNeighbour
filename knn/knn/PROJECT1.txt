@@ -1,0 +1,9 @@
+I have decided that you will write a program that is similar to our perceptron program. Your mission is to write a program that operates in the same way as perceptron ( takes in a testing file and training file in same format as our perceptron program ) but instead of using a perceptron, it uses the k-nearest neighbour algorithm. 
+
+Additional Requirements:
+1) You must also implement a reduction algorithm to keep the set of memorized examples small. 
+2) You must ask or input from the command line the value of k
+3) If you implement additional reduction algorithms, then you get extra credit.
+4) You must have a design document for any objects that you will write ( call it DESIGN.txt )
+5) Run your algorithm on the same data set as we ran our perceptron on. Who did better? Put your results in a file called "RESULTS.txt"
+6) To turn in, please create a new svn repository on odin and tell me what command I would type to turn it in. 

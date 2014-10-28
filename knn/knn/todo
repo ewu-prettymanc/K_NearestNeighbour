@@ -1,0 +1,6 @@
+// make an important vector object with outcom and 2d array of trained data 
+// make array of important vector objects....
+// make a catch for the merge sort. If we go through _IMPORTANT_SIZE/2 number 
+of times without switching any numbers then it is sorted
+// or make a catch that we loop through sorting until we loop through 
+_important_size number/2 without switching any..... better yet 

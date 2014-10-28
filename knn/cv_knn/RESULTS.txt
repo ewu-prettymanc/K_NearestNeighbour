@@ -1,0 +1,40 @@
+// KNN did better on the Perceptron...This is the best result I could get 
+// from the cross validated knn. 
+
+
+
+// The results for cross-validated k nearest neighbour are below
+// This is with a k of 5 and important vector size of 30 
+
+
+colton@ThinkPad-T61:~/cs/cs253/projects/project1/cv_knn$ 
+./knn train.csv test.csv 5
+Calculating..................................................
+ After testing 50 different sets of important vectors, 
+ The Best Testing yielded 14 errors out of 150
+ 9.33333% inaccuracy
+ 90.6667% accuracy
+colton@ThinkPad-T61:~/cs/cs253/projects/project1/cv_knn$ 
+
+
+
+// Here are the results of the perceptron on the same files 
+
+colton@ThinkPad-T61:~/cs/cs253/projects/project1/perceptron$ 
+./perceptron train.csv test.csv 
+After 10000 passes, the error is 21
+Testing yielded 15 errors.
+Percent Inaccurate is: 0.1
+weights:
+-27228.7
+257.904
+1920.38
+-29.1482
+9669.7
+122.48
+23.1936
+3625.32
+410.883
+1899.9
+threshold: 3456.01
+colton@ThinkPad-T61:~/cs/cs253/projects/project1/perceptron$ 

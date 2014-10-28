@@ -1,0 +1,59 @@
+Description/Requirements:  We are going to write a program that
+trains a perceptron on one data set and then tests it on a second data set.
+The data files must be formated as follows:  
+
+<number of lines>
+<number of columns>
+<row 1>
+<row 2>
+etc....
+
+The first number in each line IS the outcome we are trying to predict. 
+So a row would like like this
+
+outcome, data 1, data 2, data 3....data n
+
+
+STORM:
+ perceptron
+  members: 
+  -an array of weights ( cols - 1 ) 
+  -howmany weights
+  -threshold
+  -learn rate ( larger values mean bigger changes )
+  methods:
+  -classify a row
+  -update ( in case it is wrong )
+  -init ( CONSTRUCTOR )
+  -print the weights and threshold
+  
+ data set
+  members:
+   -an array of row objects
+   -how many rows
+   -how many cols
+  methods:
+   -return a pointer to a row
+   -read from a file ( CONSTRUCTOR )
+   
+ 
+ row object
+  members:
+   -howmany cols
+   -the data ( cols -1 in size )
+   -outcome 
+  methods:
+   -read itself a file ( CONSTRUCTOR )
+   -return a col
+   -return the outcome
+ driver object
+  members:
+   -training data set
+   -testing data set
+   -perceptron
+  methods:
+   -read from two files ( CONSTRUCTOR )
+   -train
+   -test
+
+OBJECTS: 
